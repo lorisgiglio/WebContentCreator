@@ -35,7 +35,11 @@
                     )
                 );
 
-                string sitemapPath = Path.Combine(_env.WebRootPath, "sitemap.xml");
+                string wwwRootPath = _env.WebRootPath;
+                if (string.IsNullOrWhiteSpace(wwwRootPath)) {
+                    wwwRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+                }
+                string sitemapPath = Path.Combine(wwwRootPath, "sitemap.xml");
                 File.WriteAllText(sitemapPath, sitemap.ToString(), Encoding.UTF8);
 
                 _logger.LogInformation("✅ Sitemap generata con successo: {SitemapPath}", sitemapPath);
