@@ -42,7 +42,7 @@
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "❌ Errore durante la generazione della sitemap.");
+                _logger.LogError(ex, "❌ Errore durante la generazione della sitemap(_env.WebRootPath:{0}).", _env.WebRootPath);
             }
         }
 

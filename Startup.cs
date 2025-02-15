@@ -6,7 +6,6 @@ namespace WebContentCreator
     {
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddEndpointsApiExplorer()
                     .AddSwaggerGen()
                     .AddHttpClient()
@@ -16,14 +15,11 @@ namespace WebContentCreator
             services.AddHostedService<SitemapBackgroundService>();
 
             services.AddRazorPages();
-
             services.AddLogging(configure => configure.AddConsole());
-
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

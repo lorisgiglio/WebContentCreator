@@ -30,6 +30,7 @@
                 catch (Exception ex)
                 {
                     _logger.LogError(ex, "❌ Errore durante l'aggiornamento della Sitemap.");
+                    continue;
                 }
 
                 // Aspetta 24 ore prima di aggiornare di nuovo la sitemap
