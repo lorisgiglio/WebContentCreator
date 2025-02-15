@@ -13,7 +13,6 @@ namespace WebContentCreator
                     .AddSingleton<SitemapGeneratorService>();
 
             services.AddHostedService<SitemapBackgroundService>();
-
             services.AddRazorPages();
             services.AddLogging(configure => configure.AddConsole());
         }

@@ -26,5 +26,6 @@ namespace WebContentCreator
                         {
                             webBuilder.UseStartup<Startup>();
                         }).UseSerilog();
+
     }
 }
