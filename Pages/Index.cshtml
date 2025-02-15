@@ -163,40 +163,6 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Inserisce il popup GDPR nel DOM
-        document.body.insertAdjacentHTML('beforeend', `
-          <div id="gdpr-popup" class="fixed-bottom bg-primary text-white p-3 rounded shadow-lg" style="margin:20px; z-index: 1050; font-family: Arial, sans-serif; position: fixed;">
-            <div class="d-flex justify-content-between align-items-center">
-              <p class="mb-0">
-                Utilizziamo Google Analytics e Search Console per monitorare il traffico. Consulta la nostra <a href="/privacy-policy" class="text-white text-decoration-underline" target="_blank">Privacy Policy</a>.
-              </p>
-              <button id="accept-gdpr" class="btn btn-light btn-sm ms-3">Accetta</button>
-            </div>
-          </div>
-        `);
-
-        const gdprConsent = localStorage.getItem('gdprConsent');
-        const consentTimestamp = localStorage.getItem('gdprConsentTimestamp');
-        const consentValidityDays = 10;
-        function isConsentValid() {
-          if (!consentTimestamp) return false;
-          const currentTime = new Date().getTime();
-          const consentTime = parseInt(consentTimestamp, 10);
-          const differenceInDays = (currentTime - consentTime) / (1000 * 60 * 60 * 24);
-          return differenceInDays < consentValidityDays;
-        }
-        if (gdprConsent !== 'accepted' || !isConsentValid()) {
-          document.getElementById('gdpr-popup').style.display = 'block';
-        } else {
-            document.getElementById('gdpr-popup').remove();
-        }
-        document.getElementById('accept-gdpr').addEventListener('click', function() {
-          localStorage.setItem('gdprConsent', 'accepted');
-          localStorage.setItem('gdprConsentTimestamp', new Date().getTime().toString());
-          document.getElementById('gdpr-popup').remove();
-        });
-    </script>
-    <script>
         $(document).ready(function () {
             // Seleziona il primo argomento disponibile e mostra le notizie corrispondenti
             var firstTopic = $('.menu-argomenti a').first().data('argomento');
@@ -216,7 +182,17 @@
                 }
             });
         });
-
     </script>
+    <a href="https://www.iubenda.com/privacy-policy/56015756" class="iubenda-black iubenda-noiframe iubenda-embed iubenda-noiframe " title="Privacy Policy ">Privacy Policy</a>
+    <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+    <a href="https://www.iubenda.com/privacy-policy/56015756/cookie-policy" class="iubenda-black iubenda-noiframe iubenda-embed iubenda-noiframe " title="Cookie Policy ">Cookie Policy</a>
+    <script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+    <script type="text/javascript">
+var _iub = _iub || [];
+_iub.csConfiguration = {"siteId":3931067,"cookiePolicyId":56015756,"lang":"it","storage":{"useSiteId":true}};
+</script>
+<script type="text/javascript" src="https://cs.iubenda.com/autoblocking/3931067.js"></script>
+<script type="text/javascript" src="//cdn.iubenda.com/cs/gpp/stub.js"></script>
+<script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
 </body>
 </html>
