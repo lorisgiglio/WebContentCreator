@@ -19,7 +19,7 @@ namespace WebContentCreator
             if (System.IO.File.Exists(filePath))
             {
                 HtmlContent = System.IO.File.ReadAllText(filePath).RemoveExampleLinks();
-                ViewData["Title"] = filePath.ExtractH1(1).RemoveHtmlTags().Replace("\"","'");
+                ViewData["Title"] = filePath.ExtractH1(1).RemoveHtmlTags().Replace("\"", "'");
                 ViewData["Description"] = filePath.ExtractH1(2).RemoveHtmlTags().Replace("\"", "'");
                 ViewData["CurrentUrl"] = Request.GetEncodedUrl();
                 ViewData["Keywords"] = filePath.ExtractKeywords();
