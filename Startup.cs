@@ -7,7 +7,7 @@ namespace WebContentCreator
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddEndpointsApiExplorer()
-                    .AddSwaggerGen()
+                    //.AddSwaggerGen()
                     .AddHttpClient()
                     .AddHostedService<HtmlGeneratorBackgroundService>()
                     .AddSingleton<SitemapGeneratorService>();
