@@ -1,5 +1,6 @@
 ﻿using Serilog;
 using static WebContentCreator.Classes.GeminiAPI;
+using static WebContentCreator.Classes.HtmlHelper;
 
 namespace WebContentCreator.Classes
 {
@@ -20,12 +21,18 @@ namespace WebContentCreator.Classes
             {
                 string linguaSelezionata = HtmlCreator.Lingue[_indexLingua];
                 _logger.LogInformation("GenerateRssItems running at: {time}", DateTimeOffset.Now);
+
                 List<RssItem> rssItems = Rss.GenerateRssItems();
                 HttpClient httpClient = new HttpClient();
+
                 try
                 {
                     foreach (var item in rssItems)
                     {
+                        string customhash = GenerateObjectHash(item);
+                        string sitemapPath = Path.Combine(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"), "sitemap.xml");
+                        if (SitemapContainsHash(sitemapPath, customhash)) continue;
+
                         string? richiesta = HtmlCreator.GeneraTestoRichiesta(item, linguaSelezionata, NumeroCaratteri);
                         if (richiesta is null) continue;
 
@@ -55,5 +62,6 @@ namespace WebContentCreator.Classes
                 }
             }
         }
+
     }
 }

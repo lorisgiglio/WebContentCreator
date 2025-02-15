@@ -1,10 +1,7 @@
 ﻿using Serilog;
 using System.Globalization;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.Json;
 using System.Text.RegularExpressions;
-using System.Xml.Linq;
+using static WebContentCreator.Classes.HtmlHelper;
 
 namespace WebContentCreator.Classes
 {
@@ -26,9 +23,6 @@ namespace WebContentCreator.Classes
         public static void CreaFileHtml(string relativePath, RssItem argomento, string lingua, string contenuto)
         {
             string customhash = GenerateObjectHash(argomento);
-            string sitemapPath = Path.Combine(System.IO.Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"), "sitemap.xml");
-            if (SitemapContainsHash(sitemapPath, customhash)) return;
-
             string dataOggi = DateTime.Now.ToString("yyyyMMdd");
             string dataPubblicazione = DateTime.Now.ToString();
 
@@ -114,48 +108,6 @@ namespace WebContentCreator.Classes
         {
             string pattern = @"<a\s+href=""https:\/\/www\.example\.com\/[^""]+\"">.*?sostituire con un link reale.*?<\/a>";
             return Regex.Replace(htmlContent, pattern, "", RegexOptions.IgnoreCase);
-        }
-        public static string GenerateObjectHash<T>(T obj)
-        {
-            string json = JsonSerializer.Serialize(obj, new JsonSerializerOptions
-            {
-                WriteIndented = false,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
-            });
-
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] inputBytes = Encoding.UTF8.GetBytes(json);
-                byte[] hashBytes = sha256.ComputeHash(inputBytes);
-
-                string hash = Convert.ToBase64String(hashBytes)
-                                    .Replace("+", "-")
-                                    .Replace("/", "_")
-                                    .TrimEnd('=');
-
-                return hash.Length > 30 ? hash.Substring(0, 30) : hash;
-            }
-        }
-        static bool SitemapContainsHash(string sitemapPath, string identifier)
-        {
-            if (!File.Exists(sitemapPath))
-            {
-                return false;
-            }
-
-            XDocument doc = XDocument.Load(sitemapPath);
-
-            XNamespace ns = doc.Root?.GetDefaultNamespace() ?? "";
-            List<string> htmlFiles = doc.Descendants(ns + "url")
-                .Select(e => e.Element(ns + "loc")?.Value)
-                .Where(value => !string.IsNullOrEmpty(value))
-                .Select(Path.GetFileName)
-                .Where(name => name?.EndsWith(".html", StringComparison.OrdinalIgnoreCase) == true)
-                .ToList()!;
-
-            if (htmlFiles is null || htmlFiles.Count == 0) return false;
-            return htmlFiles.Any(file => file.Contains(identifier));
         }
     }
 
