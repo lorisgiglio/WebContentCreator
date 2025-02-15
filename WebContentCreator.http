@@ -1,0 +1,6 @@
+@WebContentCreator_HostAddress = http://localhost:5082
+
+GET {{WebContentCreator_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

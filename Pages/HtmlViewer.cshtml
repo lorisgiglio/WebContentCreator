@@ -1,0 +1,12 @@
+﻿@page "{*fileName}"
+@model WebContentCreator.HtmlViewerModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="html-container">
+    <article>
+        <section>
+            @Html.Raw(Model.HtmlContent)
+        </section>
+    </article>
+</div>

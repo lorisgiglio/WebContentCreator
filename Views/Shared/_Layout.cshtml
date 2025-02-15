@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width">
+    <meta charset='UTF-8'>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <title>@Html.Raw(ViewData["Title"])</title>
+    <meta name="description" content="Infotoday.it @Html.Raw(ViewData["Description"])">
+    <meta name="author" content="InfoToday">
+    <meta name="keywords" content="@Html.Raw(ViewData["Keywords"])">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="@Html.Raw(ViewData["CurrentUrl"])">
+    <meta name="twitter:title" content="Infotoday.it @Html.Raw(ViewData["Title"])">
+    <meta name="twitter:description" content="@Html.Raw(ViewData["Description"])">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="@Html.Raw(ViewData["CurrentUrl"])">
+    <meta property="og:url" content="https://www.infotoday.it">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Infotoday.it – @Html.Raw(ViewData["Title"])">
+    <meta property="og:description" content="@Html.Raw(@ViewData["Description"])">
+    <meta property="og:site_name" content="InfoToday">
+    <meta property="og:locale" content="it_IT">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .contenuto-notizia {
+            margin-left: 20px;
+            padding: 20px;
+        }
+        /* Posizionamento dei pulsanti in alto a destra e layout orizzontale */
+        .social-buttons {
+            position: fixed;
+            top: 10px; /* Distanza dal bordo superiore */
+            right: 10px; /* Distanza dal bordo destro */
+            display: flex;
+            gap: 10px; /* Distanza tra i pulsanti */
+            flex-wrap: nowrap; /* Non permettere ai pulsanti di andare a capo */
+            justify-content: flex-start; /* Allinea i pulsanti all'inizio */
+        }
+
+            .social-buttons a {
+                padding: 8px 12px; /* Dimensioni più piccole */
+                border-radius: 5px;
+                text-decoration: none;
+                font-size: 11px; /* Font più piccolo */
+                display: inline-block;
+                transition: opacity 0.3s;
+                text-align: center;
+                width: auto;
+                min-width: 60px;
+                font-weight:bold;
+                box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
+                -webkit-box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
+                -moz-box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
+            }
+
+                /* Colori specifici per ogni social network */
+                .social-buttons a.facebook {
+                    background-color: #4267B2; /* Facebook blu */
+                    color: white;
+                }
+
+                .social-buttons a.twitter {
+                    background-color: black; /* X black */
+                    color: white;
+                }
+
+                .social-buttons a.linkedin {
+                    background-color: #0077b5; /* LinkedIn blu */
+                    color: white;
+                }
+
+                .social-buttons a.whatsapp {
+                    background-color: #25D366; /* WhatsApp verde */
+                    color: white;
+                }
+
+                .social-buttons a.pinterest {
+                    background-color: #E60023; /* Pinterest rosso */
+                    color: white;
+                }
+
+                .social-buttons a.reddit {
+                    background-color: #FF4500; /* Reddit arancio */
+                    color: white;
+                }
+
+                .social-buttons a:hover {
+                    opacity: 0.8;
+                }
+
+        /* Media query per schermi più piccoli */
+        @@media screen and (max-width: 768px) {
+            .social-buttons
+
+        {
+            top: 5px; /* Distanza dalla parte superiore per schermi piccoli */
+            right: 5px; /* Distanza dal lato destro per schermi piccoli */
+            gap: 5px; /* Spazio tra i pulsanti più ridotto */
+        }
+
+        .social-buttons a {
+            padding: 6px 10px; /* Ridurre il padding sui dispositivi mobili */
+            font-size: 12px; /* Ridurre la dimensione del testo */
+        }
+
+        }
+
+        /* Media query per schermi molto piccoli (come smartphone) */
+        @@media screen and (max-width: 480px) {
+            .social-buttons
+
+        {
+            top: 10px;
+            right: 10px;
+            /*flex-direction: column; /* Disporre i pulsanti in verticale sui dispositivi molto piccoli */
+            gap: 8px; /* Maggiore spazio tra i pulsanti in modalità verticale */
+        }
+
+        .social-buttons a {
+            width: 100%; /* Pulsanti che occupano tutta la larghezza disponibile */
+            padding: 8px 0; /* Rimuovere il padding laterale per pulsanti che si estendono */
+            text-align: center;
+            font-size: 14px;
+            }
+        }
+    </style>
+    <script type="application/ld+json">
+        {
+          "@@context": "http://schema.org",
+          "@@type": "NewsArticle",
+          "headline": "@Html.Raw(ViewData["Title"])",
+          "description": "@Html.Raw(ViewData["Description"])",
+          "author": {
+            "@@type": "Person",
+            "name": "InfoToday.it"
+          },
+          "datePublished": "2025-02-13T08:00:00Z",
+          "dateModified": "2025-02-13T10:00:00Z",
+          "publisher": {
+            "@@type": "InfoToday.it",
+            "name": "@Html.Raw(ViewData["Title"])",
+            "logo": {
+              "@@type": "ImageObject",
+              "url": "URL del logo"
+            }
+          },
+          "mainEntityOfPage": {
+            "@@type": "WebPage",
+            "@@id": "@Html.Raw(ViewData["CurrentUrl"])"
+          },
+          "image": ""
+        }
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N5B1QVVBC2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-N5B1QVVBC2');
+    </script>
+</head>
+<body>
+    <div class="contenuto-notizia">
+        <div class="social-buttons">
+            <a class="facebook" href="https://www.facebook.com/sharer/sharer.php?u=@Html.Raw(ViewData["CurrentUrl"])" target="_blank" title="Condividi su Facebook">
+                Facebook
+            </a>
+            <a class="twitter" href="https://twitter.com/intent/tweet?text=@Html.Raw(ViewData["Title"])&url=@Html.Raw(ViewData["CurrentUrl"])" target="_blank" title="Condividi su Twitter">
+                X
+            </a>
+            <a class="linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=@Html.Raw(ViewData["CurrentUrl"])&title=@Html.Raw(ViewData["Title"])&summary=@Html.Raw(ViewData["Description"])" target="_blank" title="Condividi su LinkedIn">
+                LinkedIn
+            </a>
+            <a class="whatsapp" href="https://api.whatsapp.com/send?text=@Html.Raw(ViewData["Title"]) @Html.Raw(ViewData["CurrentUrl"])" target="_blank" title="Condividi su WhatsApp">
+                WhatsApp
+            </a>
+            <a class="pinterest" href="https://pinterest.com/pin/create/button/?url=@Html.Raw(ViewData["CurrentUrl"])&description=@Html.Raw(ViewData["Description"])" target="_blank" title="Condividi su Pinterest">
+                Pinterest
+            </a>
+            <a class="reddit" href="https://www.reddit.com/submit?url=@Html.Raw(ViewData["CurrentUrl"])&title=@Html.Raw(ViewData["Title"])" target="_blank" title="Condividi su Reddit">
+                Reddit
+            </a>
+        </div>
+        <p>@RenderBody()</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
