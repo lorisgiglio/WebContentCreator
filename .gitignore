@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /wwwroot/html/20250215
+/wwwroot/sitemap.xml
+/Classes/GeminiAPI.cs
