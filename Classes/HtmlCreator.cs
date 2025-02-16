@@ -72,7 +72,8 @@ namespace WebContentCreator.Classes
 
             const string base_request = "Scrivi un articolo nella lingua associata al codice '{0}' come se fossi un giornalista su '{1} - {2}'. " +
                                         "Dai un titolo e scrivi almeno {3} caratteri in formato HTML con grassetto, corsivo e altra formattazione necessaria ed eventuali link (reali, non fittizi)." +
-                                        "Evita testi dove non puoi citare le persone coinvolte e il testo deve essere originale in modo da non incorrere in violazioni di copyright." +
+                                        "Evita testi dove non puoi citare le persone coinvolte (quindi senza riferimenti tra parentesi tonde o quadre) e il testo deve essere originale in modo da non incorrere in violazioni di copyright." +
+                                        "L'evento si riferisce a quest'anno, quindi cerca tra le notizie recenti e non di mesi o anni fa." +
                                         "Sostituisci i ritorni a capo con i tag BR, non includere tag html-head-body.";
 
             return string.Format(base_request, lingua, argomento.Description, argomento.Title, numeroCaratteri, argomento.Link, argomento.PubDate);
