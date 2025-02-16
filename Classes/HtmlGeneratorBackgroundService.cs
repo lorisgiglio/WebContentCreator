@@ -31,7 +31,11 @@ namespace WebContentCreator.Classes
                     {
                         string customhash = GenerateObjectHash(item);
                         string sitemapPath = Path.Combine(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"), "sitemap.xml");
-                        if (SitemapContainsHash(sitemapPath, customhash)) continue;
+                        if (SitemapContainsHash(sitemapPath, customhash))
+                        {
+                            _logger.LogInformation("GenerateRssItems skipped for existing hash {0}", customhash);
+                            continue;
+                        }
 
                         string? richiesta = HtmlCreator.GeneraTestoRichiesta(item, linguaSelezionata, NumeroCaratteri);
                         if (richiesta is null) continue;
