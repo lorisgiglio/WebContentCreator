@@ -7,4 +7,15 @@ public class RssItem
     public string Link { get; set; } = string.Empty;
     public string PubDate { get; set; } = string.Empty;
     public string Topic { get; set; } = string.Empty;
+    public DateTime? PubDateTime
+    {
+        get
+        {
+            if (DateTime.TryParse(PubDate, out DateTime parsedDate))
+            {
+                return parsedDate;
+            }
+            return null;
+        }
+    }
 }
