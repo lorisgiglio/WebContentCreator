@@ -364,3 +364,4 @@ FodyWeavers.xsd
 /wwwroot/html/
 /wwwroot/sitemap.xml
 /Classes/GeminiAPI.cs
+/Classes/Rss.cs
