@@ -11,6 +11,7 @@ namespace WebContentCreator
                     .AddSingleton<SitemapGeneratorService>();
 
             services.AddHostedService<SitemapBackgroundService>();
+            services.AddHostedService<FileTouchBackgroundService>();
             services.AddRazorPages();
             services.AddLogging(configure => configure.AddConsole());
         }
