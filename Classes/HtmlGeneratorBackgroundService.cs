@@ -22,7 +22,12 @@ namespace WebContentCreator.Classes
                 string linguaSelezionata = HtmlCreator.Lingue[_indexLingua];
                 _logger.LogInformation("GenerateRssItems running at: {time}", DateTimeOffset.Now);
 
-                List<RssItem> rssItems = Rss.GenerateRssItems().OrderByDescending(item => item.PubDateTime ?? DateTime.MinValue).ToList();
+                //List<RssItem> rssItems = Rss.GenerateRssItems().OrderByDescending(item => item.PubDateTime ?? DateTime.MinValue).ToList();
+                var rssItems = Rss.GenerateRssItems()
+                        .Where(item => item.PubDateTime.HasValue && item.PubDateTime.Value >= DateTime.Now.AddDays(-1))
+                        .OrderByDescending(item => item.PubDateTime ?? DateTime.MinValue)
+                        .ToList();
+
                 HttpClient httpClient = new HttpClient();
 
                 try

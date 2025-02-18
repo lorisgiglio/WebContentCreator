@@ -18,7 +18,7 @@ public class FileTouchBackgroundService : BackgroundService
         _logger = logger;
         // Configurazioni predefinite
         _directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "html");
-        _interval = TimeSpan.FromMinutes(5);
+        _interval = TimeSpan.FromMinutes(240);
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -32,8 +32,8 @@ public class FileTouchBackgroundService : BackgroundService
                 if (Directory.Exists(_directoryPath))
                 {
                     _logger.LogInformation("Inizio aggiornamento timestamp...");
-                    UpdateTimestampsRecursively(_directoryPath);
-                    _logger.LogInformation("Aggiornamento completato.");
+                    int counter = UpdateTimestampsRecursively(_directoryPath);
+                    _logger.LogInformation("Aggiornamento completato. {counter} file aggiornati.", counter);
                 }
                 else
                 {
@@ -49,7 +49,7 @@ public class FileTouchBackgroundService : BackgroundService
         }
     }
 
-    private void UpdateTimestampsRecursively(string directoryPath)
+    private int UpdateTimestampsRecursively(string directoryPath)
     {
         DateTime now = DateTime.Now;
 
@@ -68,10 +68,11 @@ public class FileTouchBackgroundService : BackgroundService
                 _logger.LogWarning(ex, "Errore aggiornando il file: {FilePath}", file);
             }
         }
+
         foreach (var subDir in Directory.GetDirectories(directoryPath))
         {
-            UpdateTimestampsRecursively(subDir);
+            counter += UpdateTimestampsRecursively(subDir);
         }
-        _logger.LogInformation("File aggiornati: {counter}", counter);
+        return counter;
     }
 }
