@@ -53,23 +53,25 @@ public class FileTouchBackgroundService : BackgroundService
     {
         DateTime now = DateTime.Now;
 
+        int counter = 0;
+
         foreach (var file in Directory.GetFiles(directoryPath))
         {
             try
             {
                 File.SetLastWriteTime(file, now);
                 File.SetLastAccessTime(file, now);
-                _logger.LogInformation("File aggiornato: {FilePath}", file);
+                counter++;
             }
             catch (Exception ex)
             {
                 _logger.LogWarning(ex, "Errore aggiornando il file: {FilePath}", file);
             }
         }
-
         foreach (var subDir in Directory.GetDirectories(directoryPath))
         {
             UpdateTimestampsRecursively(subDir);
         }
+        _logger.LogInformation("File aggiornati: {counter}", counter);
     }
 }
