@@ -73,6 +73,13 @@ namespace WebContentCreator.Classes
             if (htmlFiles is null || htmlFiles.Count == 0) return false;
             return htmlFiles.Any(file => file.Contains(identifier));
         }
+        public static string RemoveNewLines(this string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            return input.Replace("\r", "").Replace("\n", "");
+        }
     }
 
 }

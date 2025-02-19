@@ -35,7 +35,7 @@ namespace WebContentCreator.Classes
             string topic = SanitizeFileName(argomento.Topic).ToCamelCase();
             string nomeFile = $"{lingua}_{topic}_{arg}_{customhash}.html";
 
-            contenuto = CleanHtml(contenuto);
+            contenuto = CleanHtml(contenuto).RemoveNewLines();
 
             string htmlContent = $@"
     <div class='container mt-5'>
