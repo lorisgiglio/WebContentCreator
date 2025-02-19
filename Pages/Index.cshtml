@@ -177,24 +177,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function () {
-            // Seleziona il primo argomento disponibile e mostra le notizie corrispondenti
             var firstTopic = $('.menu-argomenti a').first();
             if (firstTopic.length) {
-                firstTopic.addClass('active'); // Evidenzia il primo link
-                $('#notizie-' + firstTopic.data('argomento')).show(); // Mostra le notizie del primo argomento
+                firstTopic.addClass('active');
+                $('#notizie-' + firstTopic.data('argomento')).show();
             }
 
             $('.menu-argomenti a').click(function (e) {
                 e.preventDefault();
-                var argomento = $(this).data('argomento');
+                var $this = $(this);
+                var argomento = $this.data('argomento');
 
                 // Nasconde tutte le notizie e mostra solo quelle corrispondenti
                 $('.notizie').hide();
                 $('#notizie-' + argomento).fadeIn();
 
-                // Rimuove la classe attiva da tutti i link e la aggiunge solo a quello cliccato
+                // Rimuove e aggiunge la classe attiva
                 $('.menu-argomenti a').removeClass('active');
-                $(this).addClass('active');
+                $this.addClass('active');
+
+                // Riporta l'elenco al top
+                $('.menu-argomenti').scrollTop(0);
 
                 // Chiude il menu a comparsa sui dispositivi mobili
                 if ($(window).width() < 992) {
@@ -202,6 +205,7 @@
                 }
             });
         });
+
     </script>
     <div style="text-align:center">
     <a href="https://www.iubenda.com/privacy-policy/56015756" class="iubenda-black iubenda-noiframe iubenda-embed iubenda-noiframe " title="Privacy Policy ">Privacy Policy</a>
