@@ -51,9 +51,8 @@
             left: 0;
             height: 100%;
             overflow-y: auto;
-            width: 250px;
+            width: 150px;
             background-color: #343a40;
-            padding-top: 20px;
         }
 
             .menu-argomenti a {
@@ -70,7 +69,7 @@
                 }
 
         .contenuto-notizie {
-            margin-left: 270px;
+            margin-left: 150px;
             padding: 20px;
         }
 
@@ -107,6 +106,10 @@
                     text-decoration: underline;
                 }
 
+        .menu-argomenti a.active {
+            background-color: #f4f4f9;
+            color: #000;
+        }
         @@media (max-width: 768px) {
             .menu-argomenti
 
@@ -175,16 +178,23 @@
     <script>
         $(document).ready(function () {
             // Seleziona il primo argomento disponibile e mostra le notizie corrispondenti
-            var firstTopic = $('.menu-argomenti a').first().data('argomento');
-            if (firstTopic) {
-                $('#notizie-' + firstTopic).show(); // Mostra le notizie del primo argomento
+            var firstTopic = $('.menu-argomenti a').first();
+            if (firstTopic.length) {
+                firstTopic.addClass('active'); // Evidenzia il primo link
+                $('#notizie-' + firstTopic.data('argomento')).show(); // Mostra le notizie del primo argomento
             }
 
             $('.menu-argomenti a').click(function (e) {
                 e.preventDefault();
                 var argomento = $(this).data('argomento');
+
+                // Nasconde tutte le notizie e mostra solo quelle corrispondenti
                 $('.notizie').hide();
                 $('#notizie-' + argomento).fadeIn();
+
+                // Rimuove la classe attiva da tutti i link e la aggiunge solo a quello cliccato
+                $('.menu-argomenti a').removeClass('active');
+                $(this).addClass('active');
 
                 // Chiude il menu a comparsa sui dispositivi mobili
                 if ($(window).width() < 992) {

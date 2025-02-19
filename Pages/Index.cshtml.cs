@@ -8,12 +8,10 @@ namespace WebContentCreator
         private readonly IWebHostEnvironment _env;
         public Dictionary<string, List<NewsItem>> NewsByTopic { get; set; } = new();
         public List<string> Topics { get; set; } = [];
-
         public IndexModel(IWebHostEnvironment env)
         {
             _env = env;
         }
-
         public void OnGet()
         {
             string basePath = Path.Combine(_env.WebRootPath, "html");
@@ -57,7 +55,6 @@ namespace WebContentCreator
 
             Topics = NewsByTopic.Keys.OrderBy(t => t).ToList();
         }
-
         public class NewsItem
         {
             public string Title { get; set; } = string.Empty;
