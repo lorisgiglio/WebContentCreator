@@ -58,7 +58,7 @@ namespace WebContentCreator
             }
 
             Topics = NewsByTopic.Keys.OrderBy(t => t).ToList();
-            RecentArticles = _articleService.GetRecentArticles(10);
+            RecentArticles = _articleService.GetRecentArticles(5);
         }
         public class NewsItem
         {
