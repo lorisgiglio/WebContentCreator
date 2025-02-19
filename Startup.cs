@@ -9,7 +9,8 @@ namespace WebContentCreator
             services.AddHttpClient()
                     .AddHostedService<HtmlGeneratorBackgroundService>()
                     .AddSingleton<SitemapGeneratorService>();
-
+            
+            services.AddSingleton<HtmlArticleService>();
             services.AddHostedService<SitemapBackgroundService>();
             services.AddHostedService<FileTouchBackgroundService>();
             services.AddRazorPages();

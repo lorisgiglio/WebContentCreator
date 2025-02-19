@@ -5,12 +5,16 @@ namespace WebContentCreator
 {
     public class IndexModel : PageModel
     {
+        private readonly HtmlArticleService _articleService;
+        public List<Article> RecentArticles { get; set; } = new();
+
         private readonly IWebHostEnvironment _env;
         public Dictionary<string, List<NewsItem>> NewsByTopic { get; set; } = new();
         public List<string> Topics { get; set; } = [];
-        public IndexModel(IWebHostEnvironment env)
+        public IndexModel(IWebHostEnvironment env, HtmlArticleService articleService)
         {
             _env = env;
+            _articleService = articleService;
         }
         public void OnGet()
         {
@@ -54,6 +58,7 @@ namespace WebContentCreator
             }
 
             Topics = NewsByTopic.Keys.OrderBy(t => t).ToList();
+            RecentArticles = _articleService.GetRecentArticles(10);
         }
         public class NewsItem
         {

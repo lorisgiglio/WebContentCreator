@@ -1,4 +1,7 @@
 User-agent: *
 Disallow: /admin/   # Evita di indicizzare pagine amministrative
 
+User-agent: Bingbot
+Allow: /
+
 Sitemap: https://www.infotoday.it/sitemap.xml
